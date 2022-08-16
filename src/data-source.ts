@@ -12,7 +12,7 @@ export const Connection = async () => {
     host: "localhost",
     port: 5432,
     username: "postgres",
-    password: "Lu274235Ely5",
+    password: "admin",
     database: "estoque_vdt",
     entities: [Provider, Model, Equipment],
     migrations: [],
