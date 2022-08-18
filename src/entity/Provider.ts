@@ -9,6 +9,8 @@ import {
   JoinColumn 
 } from 'typeorm';
 
+import { Model } from './Model';
+
 new BaseEntity();
 
 @Entity()
@@ -26,7 +28,7 @@ export class Provider extends BaseEntity{
   @Column({
     length: 15,
     unique: true,
-    type: 'char'
+    type: 'varchar'
   })
   cpf: string;
 
@@ -48,4 +50,9 @@ export class Provider extends BaseEntity{
     type: 'varchar'
   })
   city: string;
+
+  @OneToMany(() => Model, (model) => model.provider, {
+    cascade: true
+  })
+  models: Model[]
 }

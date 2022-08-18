@@ -1,28 +1,32 @@
 import { 
   Entity,
-  Column, 
-  PrimaryColumn, 
+  Column,
+  BaseEntity, 
   PrimaryGeneratedColumn, 
   CreateDateColumn, 
   OneToMany, 
-  JoinColumn, 
   ManyToOne 
 } from 'typeorm';
 
+import { Model } from './Model';
+
+new BaseEntity();
 @Entity()
-export class Equipment {
+export class Equipment extends BaseEntity{
   @PrimaryGeneratedColumn()
   id_equip: number;
 
   @Column({
-    type: 'numeric'
+    type: 'varchar',
+    length: 50,
+    unique: false
   })
-  invoice: number;
+  serial_number: number;
 
   @Column({
-    unique: true,
-    type: 'char',
-    length: 17
+    type: 'varchar',
+    length: 17,
+    default: ""
   })
   mac: string;
 
@@ -41,6 +45,8 @@ export class Equipment {
   })
   status: string;
 
+  @ManyToOne(() => Model, (model) => model.equipments, {
+    eager: true
+  })
+  model: Model
 }
-
-
